@@ -74,15 +74,15 @@ Input:
  = (5,6) 
    (7,8) 
 C = A x B 
-display C 
+display C&
 
 
 Expected Output:
-<ERROR, Missing identifier before '='>
+<ID, A>
 <ASSIGN, =>
 <MATRIX, (1,2)>
 <MATRIX, (3,4)>
-<ERROR, Missing identifier before '='>
+<ID, B>
 <ASSIGN, =>
 <MATRIX, (5,6)>
 <MATRIX, (7,8)>
@@ -93,6 +93,7 @@ Expected Output:
 <ID, B>
 <DISPLAY, display>
 <ID, C>
+<ERROR, Unknown character '&'>
 
 ```
 
@@ -121,7 +122,7 @@ Expected Output:
 
 
 
-
+```
 ## How to Run Shell Script for our Lexer/Scanner 
 
 # How to Run the Lexer/Scanner 
