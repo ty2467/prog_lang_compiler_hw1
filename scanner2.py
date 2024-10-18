@@ -8,7 +8,7 @@ class Token:
     def __repr__(self):
         return f"<{self.token_type}, {self.value}>"
 
-# Lexer class using state transitions and error checking
+# lexer class using state transitions (no libraries this time)
 class Lexer:
     def __init__(self, source_code):
         self.source_code = source_code
@@ -24,7 +24,6 @@ class Lexer:
         else:
             self.current_char = None
 
-    # Lexical analysis using State Transitions
     def scan(self):
         while self.current_char is not None:
             if self.current_char.isspace():
@@ -67,7 +66,7 @@ class Lexer:
 
     # matrix dimensions 
     def state_matrix(self):
-        matrix_value = self.current_char  # Start with '('
+        matrix_value = self.current_char 
         self.advance()
 
         while self.current_char is not None and (self.current_char.isdigit() or self.current_char in ',)'):
@@ -92,7 +91,7 @@ class Lexer:
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 scanner.py <source_code_file>")
+        print("Usage: python3 scanner2.py <source_code_file>")
         return
     
     file_path = sys.argv[1]
