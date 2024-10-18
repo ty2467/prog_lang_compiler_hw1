@@ -35,7 +35,7 @@ class Lexer:
             elif self.current_char == '=':
                 if self.last_token_type != "ID":  # Check if '=' has a preceding identifier
                     self.tokens.append(Token("ERROR", "Missing identifier before '='"))
-                self.tokens.append(Token("ASSIGN", "="))
+                self.tokens.append(Token("ASSIGNMENT_OP", "="))
                 self.advance()
             # matrix dimensions 
             elif self.current_char == '(':
