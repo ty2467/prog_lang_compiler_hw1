@@ -32,7 +32,7 @@ def scan(source_code):
             if match:
                 text = match.group(0)
                 if token_type != "WHITESPACE":  
-                    # Check for missing identifier before '='
+                    # check for missing identifier before '='
                     if token_type == "ASSIGN" and last_token_type != "ID":
                         tokens.append(Token("ERROR", "Missing identifier before '='"))
                     tokens.append(Token(token_type, text))
