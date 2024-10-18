@@ -123,3 +123,22 @@ Expected Output:
 
 
 ## How to Run Shell Script for our Lexer/Scanner 
+
+# How to Run the Lexer/Scanner 
+
+To run the lexer, follow these steps:
+
+1. **Ensure you have the following files:**
+   - `run_scanner.sh`: The shell script that runs the lexer.
+   - `scanner2.py`: Our Python lexer script.
+   - The source code file you want to analyze (e.g., `example.txt`).
+
+2. **Make the shell script executable**:
+   Open a terminal and run the following command to make the shell script executable:
+   ```bash
+   chmod +x run_scanner.sh
+
+
+# Run the script
+    ./run_scanner.sh <source_code_file> 
+    For example, if your source code file is named source_code.txt, run: ./run_scanner.sh source_code.txt
