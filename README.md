@@ -123,7 +123,11 @@ Expected Output:
 
 
 ```
+<<<<<<< HEAD
 ## How to Run Shell Script for our Lexer/Scanner 
+=======
+## How to Run Shell Script for our Lexer/Scanner
+>>>>>>> 55f0c562b8921bbdf4995b22f429334596f39607
 
 # How to Run the Lexer/Scanner 
 
