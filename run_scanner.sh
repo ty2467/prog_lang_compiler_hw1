@@ -16,4 +16,4 @@ if [ ! -f "$SOURCE_FILE" ]; then
 fi
 
 # Run the Python scanner script with the source file as input
-python3 scanner.py "$SOURCE_FILE"
+python3 scanner2.py "$SOURCE_FILE"
