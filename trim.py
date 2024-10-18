@@ -67,6 +67,6 @@ def trim_white_space(input_string: str):
                     
                 i += 1
                 j += 1
-            new_list.append(' ')#instead of appending whatever of the three, append white space
+            new_list.append(input_string[i])#has to preserve \n, for detecting line number
         i+=1
     return new_list
