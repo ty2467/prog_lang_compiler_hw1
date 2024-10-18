@@ -1,3 +1,5 @@
+import sys
+
 class Token:
     def __init__(self, token_type, value):
         self.token_type = token_type
@@ -6,13 +8,14 @@ class Token:
     def __repr__(self):
         return f"<{self.token_type}, {self.value}>"
 
+# Lexer class using state transitions and error checking
 class Lexer:
     def __init__(self, source_code):
         self.source_code = source_code
         self.position = 0  
         self.tokens = []  
         self.current_char = self.source_code[self.position] if self.source_code else None
-
+        self.last_token_type = None  
 
     def advance(self):
         self.position += 1
@@ -21,7 +24,7 @@ class Lexer:
         else:
             self.current_char = None
 
-    #State Transitions 
+    # Lexical analysis using State Transitions
     def scan(self):
         while self.current_char is not None:
             if self.current_char.isspace():
@@ -29,11 +32,13 @@ class Lexer:
             # identifiers (A-Z)
             elif self.current_char.isalpha() and self.current_char.isupper():
                 self.tokens.append(self.state_identifier())
-            # assignment operator '='
+            # assignment operator =
             elif self.current_char == '=':
+                if self.last_token_type != "ID":  # Check if '=' has a preceding identifier
+                    self.tokens.append(Token("ERROR", "Missing identifier before '='"))
                 self.tokens.append(Token("ASSIGN", "="))
                 self.advance()
-            # matrix elements '(n,m)'
+            # matrix dimensions 
             elif self.current_char == '(':
                 self.tokens.append(self.state_matrix())
             # operators 'x' and '+'
@@ -43,25 +48,26 @@ class Lexer:
             elif self.current_char == '+':
                 self.tokens.append(Token("OP_ADD", "+"))
                 self.advance()
-            # state for keyword 'display'
+            # keyword 'display'
             elif self.current_char == 'd':
                 self.tokens.append(self.state_display())
-            # for errors 
+            # all unknown chars are treated as errors
             else:
-                self.tokens.append(Token("ERROR", self.current_char))
-                self.advance()
+                self.tokens.append(Token("ERROR", f"Unknown character '{self.current_char}'"))
+                self.advance()   
 
         return self.tokens
 
-    # state for parsing identifiers (single capital letters A-Z)
+    # (single capital letters A-Z)
     def state_identifier(self):
         identifier = self.current_char
-        self.advance()  
+        self.advance()  # Move past the character
+        self.last_token_type = "ID"  # Set last token type to ID
         return Token("ID", identifier)
 
-    # state for parsing matrix elements 
+    # matrix dimensions 
     def state_matrix(self):
-        matrix_value = self.current_char  # MUST start with '(' 
+        matrix_value = self.current_char  # Start with '('
         self.advance()
 
         while self.current_char is not None and (self.current_char.isdigit() or self.current_char in ',)'):
@@ -70,7 +76,7 @@ class Lexer:
 
         return Token("MATRIX", matrix_value)
 
-    # state 'display' parsing 
+    # keyword 'display'
     def state_display(self):
         display_keyword = ""
         for expected_char in "display":
@@ -78,24 +84,27 @@ class Lexer:
                 display_keyword += self.current_char
                 self.advance()
             else:
-                return Token("ERROR", display_keyword + self.current_char)
+                return Token("ERROR", f"Invalid keyword: '{display_keyword}'")
 
+        self.last_token_type = "DISPLAY"
         return Token("DISPLAY", "display")
 
 
-# example input 
-source_code = """
- = (1,2)
-    (3,4)
- = (5,6)
-    (7,8)
-C = A x B
-display C
-"""
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python3 scanner.py <source_code_file>")
+        return
+    
+    file_path = sys.argv[1]
+    with open(file_path, 'r') as file:
+        source_code = file.read()
 
 
-lexer = Lexer(source_code)
-tokens = lexer.scan()
+    lexer = Lexer(source_code)
+    tokens = lexer.scan()
 
-for token in tokens:
-    print(token)
+    for token in tokens:
+        print(token)
+
+if __name__ == "__main__":
+    main()
