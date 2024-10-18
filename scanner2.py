@@ -89,15 +89,30 @@ class Lexer:
         return Token("DISPLAY", "display")
 
 
+import trim
+def read_string_clean(path_to_file):
+    buffer_size = 2048
+    file_as_string = ""
+    with open(path_to_file, 'r') as source_code:
+        while True:
+            file_read_buffer = source_code.read(buffer_size)
+            if not file_read_buffer: 
+                break
+
+            file_as_string += file_read_buffer
+
+    removed_single_comment = ''.join(trim.trim_single_comment(path_to_file))
+    removed_white_space = ''.join(trim.trim_white_space(removed_single_comment))
+    removed_block_comment = ''.join(trim.trim_block_comment(removed_white_space))
+    return removed_block_comment
+
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 scanner2.py <source_code_file>")
+        print("Usage: python3 scanner.py <source_code_file>")
         return
     
     file_path = sys.argv[1]
-    with open(file_path, 'r') as file:
-        source_code = file.read()
-
+    source_code = read_string_clean(file_path)
 
     lexer = Lexer(source_code)
     tokens = lexer.scan()
@@ -107,3 +122,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

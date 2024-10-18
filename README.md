@@ -69,13 +69,44 @@ Expected Output:
 ```
 Input:
 
- = (1,2) 
-   (3,4) 
- = (5,6) 
-   (7,8) 
+A = (1,2) 
+    (3,4) 
+B = (5,6) 
+    (7,8) 
 C = A x B 
-display C&
+display C 
 
+
+Expected Output:
+<ERROR, Missing identifier before '='>
+<ASSIGN, =>
+<MATRIX, (1,2)>
+<MATRIX, (3,4)>
+<ERROR, Missing identifier before '='>
+<ASSIGN, =>
+<MATRIX, (5,6)>
+<MATRIX, (7,8)>
+<ID, C>
+<ASSIGN, =>
+<ID, A>
+<OP_MUL, x>
+<ID, B>
+<DISPLAY, display>
+<ID, C>
+
+```
+
+### Sample Program 3: 
+```
+**Input:**
+
+Input Program:
+A = (1,2) #matrix A
+    (3,4)
+B = (5,6)
+    (7,8)
+C = A x B #matrix B
+display C
 
 Expected Output:
 <ID, A>
@@ -93,13 +124,7 @@ Expected Output:
 <ID, B>
 <DISPLAY, display>
 <ID, C>
-<ERROR, Unknown character '&'>
-
 ```
-
-### Sample Program 3: 
-```
-**Input:**
 
 
 **Expected Output:**
@@ -108,7 +133,37 @@ Expected Output:
 ### Sample Program 4: 
 ```
 **Input:**
+```
+**Input:**
 
+Input Program:
+`
+Below is the declaration of two matrices, and C is their product
+`
+A = (1,2)
+    (3,4)
+B = (5,6)
+    (7,8)
+C = A x B
+display C
+
+Expected Output:
+<ID, A>
+<ASSIGN, =>
+<MATRIX, (1,2)>
+<MATRIX, (3,4)>
+<ID, B>
+<ASSIGN, =>
+<MATRIX, (5,6)>
+<MATRIX, (7,8)>
+<ID, C>
+<ASSIGN, =>
+<ID, A>
+<OP_MUL, x>
+<ID, B>
+<DISPLAY, display>
+<ID, C>
+```
 
 **Expected Output:**
 ```
@@ -116,22 +171,49 @@ Expected Output:
 ```
 
 **Input:**
+```
+**Input:**
 
+Input Program:
+A = (1,2)
+    (3,4)
+B = (     5,     6)
+    (     7,     8)
+C = A x B
+display C
+
+Expected Output:
+<ID, A>
+<ASSIGN, =>
+<MATRIX, (1,2)>
+<MATRIX, (3,4)>
+<ID, B>
+<ASSIGN, =>
+<MATRIX, (5,6)>
+<MATRIX, (7,8)>
+<ID, C>
+<ASSIGN, =>
+<ID, A>
+<OP_MUL, x>
+<ID, B>
+<DISPLAY, display>
+<ID, C>
+```
 
 **Expected Output:**
 
 
+## Note on Structure of the File:
+read_string_clean(path_to_file) is the function that takes in the file path and deletes single comments,
+white spaces, and block comments, using the helper functions in trim.
+After that the cleaned file is passed into the token generation phase as source_code
 
-```
-<<<<<<< HEAD
 ## How to Run Shell Script for our Lexer/Scanner 
-=======
-## How to Run Shell Script for our Lexer/Scanner
->>>>>>> 55f0c562b8921bbdf4995b22f429334596f39607
 
 # How to Run the Lexer/Scanner 
 
 To run the lexer, follow these steps:
+
 
 1. **Ensure you have the following files:**
    - `run_scanner.sh`: The shell script that runs the lexer.
