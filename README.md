@@ -35,10 +35,10 @@ The following token types and their respective regular expressions are defined i
 
 ## Sample Input Programs and Expected Outputs
 
-### Sample 1: Valid Matrix Declaration and Operations
+### Sample Program 1: Valid Matrix Declaration and Operations
 
-**Input:**
-```plaintext
+```
+Input Program:
 A = (1,2)
     (3,4)
 B = (5,6)
@@ -46,5 +46,80 @@ B = (5,6)
 C = A x B
 display C
 
-#### Expected Output 
+Expected Output:
+<ID, A>
+<ASSIGN, =>
+<MATRIX, (1,2)>
+<MATRIX, (3,4)>
+<ID, B>
+<ASSIGN, =>
+<MATRIX, (5,6)>
+<MATRIX, (7,8)>
+<ID, C>
+<ASSIGN, =>
+<ID, A>
+<OP_MUL, x>
+<ID, B>
+<DISPLAY, display>
+<ID, C>
+```
 
+### Sample Program 2: Missing Identifier(s) Before Assignment Operator
+
+```
+Input:
+
+ = (1,2) 
+   (3,4) 
+ = (5,6) 
+   (7,8) 
+C = A x B 
+display C 
+
+
+Expected Output:
+<ERROR, Missing identifier before '='>
+<ASSIGN, =>
+<MATRIX, (1,2)>
+<MATRIX, (3,4)>
+<ERROR, Missing identifier before '='>
+<ASSIGN, =>
+<MATRIX, (5,6)>
+<MATRIX, (7,8)>
+<ID, C>
+<ASSIGN, =>
+<ID, A>
+<OP_MUL, x>
+<ID, B>
+<DISPLAY, display>
+<ID, C>
+
+```
+
+### Sample Program 3: 
+```
+**Input:**
+
+
+**Expected Output:**
+
+```
+### Sample Program 4: 
+```
+**Input:**
+
+
+**Expected Output:**
+```
+### Sample Program 5: 
+```
+
+**Input:**
+
+
+**Expected Output:**
+
+
+
+
+## How to Run Shell Script for our Lexer/Scanner 
