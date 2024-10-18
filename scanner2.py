@@ -61,8 +61,8 @@ class Lexer:
     # (single capital letters A-Z)
     def state_identifier(self):
         identifier = self.current_char
-        self.advance()  # Move past the character
-        self.last_token_type = "ID"  # Set last token type to ID
+        self.advance()  
+        self.last_token_type = "ID"  
         return Token("ID", identifier)
 
     # matrix dimensions 
