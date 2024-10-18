@@ -121,8 +121,8 @@ Expected Output:
 
 
 
-
-## How to Run Shell Script for our Lexer/Scanner 
+```
+## How to Run Shell Script for our Lexer/Scanner
 
 # How to Run the Lexer/Scanner 
 
